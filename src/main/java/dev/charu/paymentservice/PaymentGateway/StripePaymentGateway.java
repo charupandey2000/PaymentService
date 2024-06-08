@@ -42,6 +42,14 @@ public class StripePaymentGateway implements PaymentGateway{
                                         .setQuantity(1L)
                                         .build()
                         )
+                        .setAfterCompletion(
+                                PaymentLinkCreateParams.AfterCompletion.builder()
+                                        .setType(PaymentLinkCreateParams.AfterCompletion.Type.REDIRECT)
+                                        .setRedirect(
+                                                PaymentLinkCreateParams.AfterCompletion.Redirect.builder().
+                                                        setUrl("https://www.scaler.com").build()
+        ).build()
+                                )
                         .build();
         PaymentLink paymentLink = PaymentLink.create(paymentLinkCreateParams);
         return paymentLink.getUrl();
